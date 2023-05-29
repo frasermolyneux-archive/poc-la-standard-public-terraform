@@ -92,3 +92,37 @@ resource "azurerm_logic_app_standard" "logic" {
     type = "SystemAssigned"
   }
 }
+
+resource "azurerm_monitor_diagnostic_setting" "logic" {
+  for_each = toset(var.locations)
+
+  name = azurerm_log_analytics_workspace.law.name
+
+  log_analytics_workspace_id = azurerm_log_analytics_workspace.law.id
+
+  target_resource_id = azurerm_logic_app_standard.logic[each.value].id
+
+  metric {
+    category = "AllMetrics"
+
+    retention_policy {
+      enabled = false
+    }
+  }
+
+  enabled_log {
+    category = "WorkflowRuntime"
+
+    retention_policy {
+      enabled = false
+    }
+  }
+
+  enabled_log {
+    category = "FunctionAppLogs"
+
+    retention_policy {
+      enabled = false
+    }
+  }
+}
