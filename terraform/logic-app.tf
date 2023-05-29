@@ -79,7 +79,7 @@ resource "azurerm_logic_app_standard" "logic" {
     "APPLICATIONINSIGHTS_CONNECTION_STRING" = azurerm_application_insights.ai[each.value].connection_string
     "FUNCTIONS_WORKER_RUNTIME"              = "node"
     "WEBSITE_NODE_DEFAULT_VERSION"          = "~16"
-    "keyvault-uri"                          = azurerm_key_vault.kv[each.value].vault_uri
+    "keyvault_uri"                          = azurerm_key_vault.kv[each.value].vault_uri
   }
 
   site_config {

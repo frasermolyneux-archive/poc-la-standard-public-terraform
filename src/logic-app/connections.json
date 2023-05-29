@@ -5,7 +5,7 @@
             "displayName": "keyvault-connection",
             "parameterSetName": "ManagedServiceIdentity",
             "parameterValues": {
-                "VaultUri": "@appsetting('keyvault-uri')",
+                "VaultUri": "@appsetting('keyvault_uri')",
                 "authProvider": {
                     "Type": "ManagedServiceIdentity"
                 }
