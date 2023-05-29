@@ -14,7 +14,11 @@
             "serviceProviderId": "/serviceProviders/keyVault"
           }
         },
-        "runAfter": {}
+        "runAfter": {
+          "Initialize_variable": [
+            "SUCCEEDED"
+          ]
+        }
       },
       "Initialize_variable": {
         "type": "InitializeVariable",
@@ -27,11 +31,7 @@
             }
           ]
         },
-        "runAfter": {
-          "Get_secret": [
-            "SUCCEEDED"
-          ]
-        }
+        "runAfter": {}
       }
     },
     "contentVersion": "1.0.0.0",
