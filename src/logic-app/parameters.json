@@ -1,0 +1,6 @@
+{
+    "another_super_secret": {
+        "type": "String",
+        "value": "@appsetting('another_super_secret')"
+    }
+}
