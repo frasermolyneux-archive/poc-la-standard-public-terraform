@@ -80,6 +80,7 @@ resource "azurerm_logic_app_standard" "logic" {
     "FUNCTIONS_WORKER_RUNTIME"              = "node"
     "WEBSITE_NODE_DEFAULT_VERSION"          = "~16"
     "keyvault_uri"                          = azurerm_key_vault.kv[each.value].vault_uri
+    "another_super_secret"                  = format("@Microsoft.KeyVault(SecretUri=https://%s.vault.azure.net/secrets/%s/)", azurerm_key_vault.kv[each.value].name, azurerm_key_vault_secret.kv_example_2[each.value].name)
   }
 
   site_config {
