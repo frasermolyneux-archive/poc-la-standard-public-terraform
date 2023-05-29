@@ -10,7 +10,7 @@ resource "azurerm_api_connection" "keyvault" {
 
   name                = "keyvault-connection"
   resource_group_name = azurerm_resource_group.kv[each.value].name
-  managed_api_id      = data.azurerm_managed_api.keyvault.id
+  managed_api_id      = data.azurerm_managed_api.keyvault[each.value].id
   display_name        = "Key Vault"
 
   parameter_values = {
@@ -22,6 +22,6 @@ resource "azurerm_api_connection" "keyvault" {
 
   lifecycle {
     # NOTE: since the connectionString is a secure value it's not returned from the API
-    ignore_changes = ["parameter_values"]
+    ignore_changes = [parameter_values]
   }
 }
