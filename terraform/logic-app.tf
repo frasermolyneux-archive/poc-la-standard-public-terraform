@@ -37,6 +37,27 @@ resource "azurerm_monitor_diagnostic_setting" "logic_svcplan" {
   }
 }
 
+resource "azurerm_storage_account" "logic" {
+  for_each = toset(var.locations)
+
+  name = format("sala%s", lower(random_string.location[each.value].result))
+
+  resource_group_name = azurerm_resource_group.logic[each.value].name
+  location            = azurerm_resource_group.logic[each.value].location
+
+  account_tier             = "Standard"
+  account_replication_type = "LRS"
+
+  min_tls_version = "TLS1_2"
+
+  public_network_access_enabled = true
+
+  network_rules {
+    default_action = "Allow"
+    bypass         = ["AzureServices"]
+  }
+}
+
 resource "azurerm_logic_app_standard" "logic" {
   for_each = toset(var.locations)
 
