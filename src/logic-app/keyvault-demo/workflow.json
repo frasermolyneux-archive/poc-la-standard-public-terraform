@@ -3,7 +3,6 @@
     "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
     "actions": {
       "Get_secret": {
-        "type": "ServiceProvider",
         "inputs": {
           "parameters": {
             "secretName": "my-super-secret"
@@ -18,10 +17,10 @@
           "Initialize_variable": [
             "SUCCEEDED"
           ]
-        }
+        },
+        "type": "ServiceProvider"
       },
       "Initialize_variable": {
-        "type": "InitializeVariable",
         "inputs": {
           "variables": [
             {
@@ -31,33 +30,18 @@
             }
           ]
         },
-        "runAfter": {}
+        "runAfter": {},
+        "type": "InitializeVariable"
       }
     },
     "contentVersion": "1.0.0.0",
     "outputs": {},
     "triggers": {
       "When_a_HTTP_request_is_received": {
-        "type": "Request",
-        "kind": "Http"
+        "kind": "Http",
+        "type": "Request"
       }
     }
   },
-  "connectionReferences": {
-    "keyVault": {
-      "connection": {
-        "id": "/serviceProviders/keyVault/connections/keyVault"
-      },
-      "connectionName": "keyvault-connection",
-      "api": {
-        "id": "/serviceProviders/keyVault"
-      }
-    }
-  },
-  "parameters": {
-    "another_super_secret": {
-      "type": "String",
-      "value": "@appsetting('another_super_secret')"
-    }
-  }
+  "kind": "Stateful"
 }
