@@ -16,7 +16,7 @@ resource "azurerm_service_plan" "logic" {
   location            = azurerm_resource_group.logic[each.value].location
 
   os_type  = "Windows"
-  sku_name = "WS1"
+  sku_name = "WS3"
 }
 
 resource "azurerm_monitor_diagnostic_setting" "logic_svcplan" {
